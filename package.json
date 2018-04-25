@@ -1,0 +1,25 @@
+{
+  "name": "react-caipu",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd-mobile": "^2.1.8",
+    "react": "^16.3.2",
+    "react-app-rewired": "^1.5.1",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.7.0",
+    "jsonp": "^0.2.1",
+    "pubsub-js": "^1.6.0",
+    "react-app-rewired": "^1.5.1",
+    "react-router-dom": "^4.2.2"
+  }
+}

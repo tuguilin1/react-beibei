@@ -1,0 +1,62 @@
+.Goods{
+	width: 100%;
+	display: flex;
+	margin-top: 1rem;
+}
+.goods{
+	width: 49.85%;
+	overflow: hidden;
+	
+}
+
+.goods img{
+	width: 90%;
+	margin-left: 5%;
+}
+
+.goods div{
+	height: 2rem;
+}
+.now-price{
+	font-size: 1rem;
+	color:#ff4965;
+}
+
+.price{
+	position: relative;
+	box-sizing: border-box;
+	padding-left: 0.5rem;
+}
+
+.ori-price{
+	color:#999;
+	font-size: 0.7rem;
+	text-decoration:line-through
+}
+
+.discount{
+	position: absolute;
+	right: 1rem;
+	font-size: 0.7rem;
+	color:#999;
+}
+
+.short-desc{
+	text-overflow:ellipsis; 
+	white-space:nowrap; 
+	overflow:hidden;
+	box-sizing: border-box;
+	padding-left: 0.5rem;
+	font-size: 0.9rem;
+}
+
+.long-desc{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp:2;
+	-webkit-box-orient: vertical;
+	box-sizing: border-box;
+	padding-left: 0.5rem;
+	font-size: 0.9rem;
+}

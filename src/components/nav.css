@@ -1,0 +1,19 @@
+nav{
+	width: 100%;
+	display: flex;
+	overflow: scroll;
+	height: 4rem;
+	line-height: 4rem;
+}
+
+.outer-container{
+	height: 3rem;
+	overflow: hidden;
+}
+
+nav div{
+	box-sizing: border-box;
+	min-width: 4rem;
+	text-align: center;
+}
+

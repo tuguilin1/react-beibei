@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-import './App.css';
-import { Button } from 'antd-mobile';
+import HomePage from './components/homepage';
+import Brand from './components/brand'
+
+import { BrowserRouter, Route, Redirect,Switch } from 'react-router-dom'
+
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-         <Button type="primary">Button</Button>
+         <BrowserRouter>
+			<Switch>
+				<Route path='/index' component={HomePage}></Route>
+				<Route path='/brand/:name' component={Brand}></Route>
+				<Redirect to='/index'></Redirect>
+			</Switch>
+		</BrowserRouter>
       </div>
     );
   }

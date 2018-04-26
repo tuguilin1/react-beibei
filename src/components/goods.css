@@ -2,6 +2,7 @@
 	width: 100%;
 	display: flex;
 	margin-top: 1rem;
+	flex-wrap: wrap;
 }
 .goods{
 	width: 49.85%;

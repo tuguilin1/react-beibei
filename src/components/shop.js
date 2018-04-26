@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Redirect} from 'react-router-dom'
 import { Icon, Grid } from 'antd-mobile'
+import {connect} from 'react-redux'
 import getData from "../api/jsonp"
 import Goods from "./goods"
 import "./shop.css"
-
+import {getShopinfo} from "../redux/shopinfo";
+import { Link} from "react-router-dom";
+@connect(
+	null,
+	{getShopinfo}
+)
 class Shop extends Component{
 	constructor(props){
 		super(props)
@@ -12,31 +18,24 @@ class Shop extends Component{
 			list:[],
 			tag:"",
 		}
+		this.handlePage.bind(this)
 	}
 	componentWillMount(){
 		this.handlePage()
 	}
+	componentWillReceiveProps(nextprops){
+		this.handlePage(nextprops.page)
+	}
 	jump(item){
-		window.location.href = `/brand/${item}`
+		this.props.getShopinfo({shopName:item.brand_name,buyInfo:item.buying_info,shopImg:item.brand_logo});
 	}
 	handlePage(page = this.props.page){
-		const navObject = {
-			"推荐":"https://sapi.beibei.com/martshow/new/1-1.html",
-			"童装":"https://sapi.beibei.com/martshow/channel/1-dress---0.html",
-			"童鞋":"https://sapi.beibei.com/martshow/channel/1-shoes---0.html",
-			"婴童用品":"https://sapi.beibei.com/martshow/channel/1-daily_goods---0.html",
-			"女包":"https://sapi.beibei.com/martshow/channel/1-woman_dress---0.html",
-			"鞋包":"https://sapi.beibei.com/martshow/channel/1-woman_shoes_bags---0.html",
-			"居家":"https://sapi.beibei.com/martshow/channel/1-house---0.html",
-			"美妆":"https://sapi.beibei.com/martshow/channel/1-beauty---0.html",
-			"美食":"https://sapi.beibei.com/martshow/channel/1-food---0.html"
-		}
-		const url = navObject[page]
-		getData(url).then((data)=>{
+		const url = this.props.list[page]
+		getData(url,this.props.param).then((data)=>{
 			this.setState({
 				list:data.martshows.map((items,index)=>{
 					return(			
-						<div key={index} onClick = {()=>{this.jump(items[items.type].event_id)}}>
+						<Link key={index} to={'/brand/'+items[items.type].event_id}><div  onClick = {()=>{this.jump(items[items.type])}}>
 							<header className="head">
 								<img src={items[items.type].brand_logo} />
 								{items[items.type].brand_name}
@@ -46,7 +45,7 @@ class Shop extends Component{
 							<section>
 								<Goods data={items[items.type].items}/>
 							</section>
-						</div>)
+						</div></Link>)
 				})
 			})
 		})

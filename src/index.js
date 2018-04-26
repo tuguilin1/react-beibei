@@ -1,20 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from "./App"
 import './index.css';
-import HomePage from './components/homepage';
-import Brand from './components/brand'
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import reducers from './reducer'
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter, Route, Redirect,Switch } from 'react-router-dom'
+const store = createStore(reducers,compose(
+	applyMiddleware(thunk),
+	window.devToolsExtension?window.devToolsExtension():f=>f
+))
+
+
 
 ReactDOM.render(
-	<BrowserRouter>
-		<Switch>
-
-			<Route path='/index' component={HomePage}></Route>
-			<Route path='/brand/:name' component={Brand}></Route>
-			<Redirect to='/index'></Redirect>
-		</Switch>
-	</BrowserRouter>,
+	(<Provider store={store}>
+		<App/>
+	</Provider>),
 
 	document.getElementById('root')
 );

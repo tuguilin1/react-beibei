@@ -13,15 +13,26 @@ class HomePage extends Component{
 	handleClick(event){
 		this.setState({
 			page:event.target.innerHTML
-		},this.shop.handlePage(event.target.innerHTML))
+		})
 	}
 	render(){
-		const navList = ["推荐","童装","童鞋","婴童用品","女包","鞋包","居家","美妆","美食","下期预告"].reverse()
+		const navList = this.props.data||["推荐","童装","童鞋","婴童用品","女包","鞋包","居家","美妆","美食","下期预告"].reverse();
+		const List =this.props.list||{
+			"推荐":"https://sapi.beibei.com/martshow/new/1-1.html",
+			"童装":"https://sapi.beibei.com/martshow/channel/1-dress---0.html",
+			"童鞋":"https://sapi.beibei.com/martshow/channel/1-shoes---0.html",
+			"婴童用品":"https://sapi.beibei.com/martshow/channel/1-daily_goods---0.html",
+			"女包":"https://sapi.beibei.com/martshow/channel/1-woman_dress---0.html",
+			"鞋包":"https://sapi.beibei.com/martshow/channel/1-woman_shoes_bags---0.html",
+			"居家":"https://sapi.beibei.com/martshow/channel/1-house---0.html",
+			"美妆":"https://sapi.beibei.com/martshow/channel/1-beauty---0.html",
+			"美食":"https://sapi.beibei.com/martshow/channel/1-food---0.html"
+		}
 		return(
 			<div>
 				<Nav data={navList} handleClick = {this.handleClick.bind(this)} />
 				<Header/>
-				<Shop page={this.state.page} ref = {(shop)=>{this.shop = shop}}/>
+				<Shop page={this.state.page} list={List} param={this.props.param}/>
 			</div>
 		)
 	}

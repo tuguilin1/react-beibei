@@ -32,3 +32,8 @@ section{
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
+
+a{
+	text-decoration: none;
+	color:#222;
+}

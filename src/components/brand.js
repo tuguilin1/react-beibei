@@ -31,7 +31,7 @@ class Brand extends Component{
 		const url = `https://sapi.beibei.com/martshow/item/new/${this.props.match.params.name}-1-hot-0-0-0-0.html`
 		getBrand(url).then((data)=>{
 			this.setState({
-				brandList:<Goods data={data.hot_items_info.hot_items}/>
+				brandList:<Goods eventid={this.props.match.params.name} data={data.hot_items_info.hot_items}/>
 			})
 		})
 
@@ -63,7 +63,7 @@ class Brand extends Component{
 						<span>猜你喜欢</span>
 					</div>
 					<Nav data={this.state.recList} handleClick = {this.handleClick.bind(this)} />
-					<Recommend page={this.state.page} list={this.state.urlList} param="BeibeiMartshowItemNewGet"/>
+					<Recommend page={this.state.page} eventid={this.props.match.params.name} list={this.state.urlList} param="BeibeiMartshowItemNewGet"/>
 				</div>
 
 			</div>

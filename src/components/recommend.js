@@ -22,7 +22,6 @@ class Recommend extends Component{
 		this.handlePage()
 	}
 	componentWillReceiveProps(nextprops){
-		console.log(nextprops.page)
 		this.handlePage(nextprops.page)
 	}
 	// jump(item){
@@ -32,7 +31,7 @@ class Recommend extends Component{
 		const url = this.props.list[page]
 		getData(url,this.props.param).then((data)=>{
 			this.setState({
-				list:<Goods data={data.martshow_items}/>
+				list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>
 			})
 		})
 	}

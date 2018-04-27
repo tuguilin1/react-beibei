@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from "./header"
 import Nav from "./nav"
-import getData from "../api/jsonp"
 import Shop from "./shop"
 class HomePage extends Component{
 	constructor(props){

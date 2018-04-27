@@ -1,7 +1,7 @@
 import jsonp from "jsonp"
 
 
-var getData = function(url,param){
+var getData = function(url,param=""){
 	return new Promise((resolve,reject)=>{
 		let  name
 		/channel/i.test(url)?name = "BeibeiMartshowChannelGet":name = 'BeibeiMartshowNewGet'

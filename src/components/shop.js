@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect} from 'react-router-dom'
-import { Icon, Grid } from 'antd-mobile'
+import { Icon } from 'antd-mobile'
 import {connect} from 'react-redux'
 import getData from "../api/jsonp"
 import Goods from "./goods"

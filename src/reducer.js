@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
 import {shop} from "./redux/shopinfo"
-
-export default combineReducers({shop})
+import {goods} from "./redux/goodsinfo"
+export default combineReducers({shop,goods})

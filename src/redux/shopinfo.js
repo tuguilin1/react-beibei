@@ -10,7 +10,6 @@ const initState = {
 export function shop(state = initState,action){
 	switch(action.type){
 		case SHOP_INFO:
-			console.log(2)
 			return action.data
 		default:
 			return state

@@ -13,7 +13,7 @@ class Nav extends Component{
 		};
 		return(
 			<div className="outer-container">
-				<nav onClick={this.props.handleClick}>
+				<nav className={this.props.data.length>5?"long-nav":"short-nav"} onClick={this.props.handleClick}>
 					{items}
 				</nav>
 			</div>

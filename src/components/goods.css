@@ -9,6 +9,10 @@
 	overflow: hidden;
 	
 }
+.image{
+	width: 100%;
+	min-height: 11rem;
+}
 
 .goods img{
 	width: 90%;

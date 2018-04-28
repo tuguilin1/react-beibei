@@ -16,6 +16,7 @@ class App extends Component {
 				<Route path='/index' component={HomePage}></Route>
 				<Route path='/brand/:name' component={Brand}></Route>
         <Route path="/detail" component={Detail}></Route>
+        <Route path="/recomment" component={Detail}></Route>
 				<Redirect to='/index'></Redirect>
 			</Switch>
 		</BrowserRouter>

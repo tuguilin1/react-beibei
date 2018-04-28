@@ -30,9 +30,16 @@ class Recommend extends Component{
 	handlePage(page = this.props.page){
 		const url = this.props.list[page]
 		getData(url,this.props.param).then((data)=>{
-			this.setState({
-				list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>
-			})
+			if(data.martshow_items){
+				this.setState({
+					list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>
+				})			
+			}else if(data.count){
+				this.setState({
+					list:<Goods eventid={this.props.eventid} data={data.fightgroup_items}/>
+				})	
+			}
+
 		})
 	}
 	render(){

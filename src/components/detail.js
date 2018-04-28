@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { Icon } from 'antd-mobile';
+import { Icon,Button } from 'antd-mobile';
 import { Tag } from 'antd-mobile';
 import Comments from "./commonts"
 import axios from "axios"
 import "./detail.css"
 import getData from "../api/jsonp"
 import toDecimal from "../js/price"
+import Swiper from "./swiper"
+import Nav from "./nav.js"
+import Recommend from "./recommend"
 @connect( state=>state.goods )
 class Detail extends Component{
 	constructor(props){
 		super(props)
 		this.state={
-			goods:""
+			goods:"",
+			list:["9.9秒杀",'母婴','百货','童装','食品','美妆','服饰'].reverse(),
+			page:"9.9秒杀",
+			urlList:{
+				'9.9秒杀':'https://sapi.beibei.com/fightgroup/nine_freeship/1-50-99.html',
+				"母婴":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-3_5_7-1-50.html`,
+				"百货":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-393_1285_1648-1-50.html`,
+				"童装":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-2_1230-1-50.html`,
+				"食品":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-328_1242-1-50.html`,
+				"美妆":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-591-1-50.html`,
+				"服饰":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-6_449_562_571_1454_1455_1472_1485_1552-1-50.html`
+			}
 		}
 	}
-
+	handleClick(event){
+		this.setState({
+			page:event.target.innerHTML
+		})
+	}
 	componentDidMount(){
 		const url = `https://sapi.beibei.com/item/rate/0-${this.props.iid}-1-10.html`
 		getData(url,"BeibeiItemRateGet").then((data)=>{
@@ -79,9 +97,10 @@ class Detail extends Component{
 							</div>
 						</div>
 						<div>
-							<Comments/>
-							<Comments/>
+
+							<Comments list={data.rate_items.slice(0,2)}/>
 						</div>
+						<Button>查看全部评价</Button>
 					</div>
 			})
 		})
@@ -91,6 +110,11 @@ class Detail extends Component{
 		return(
 			<div>
 				{this.state.goods}
+				<header className="reco-goods">  大家还买了</header>
+				<Swiper event_id={this.props.eventId} iid={this.props.iid} />
+				<Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
+				<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/>
+
 			</div>
 		)
 	}

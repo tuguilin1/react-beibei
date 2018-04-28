@@ -13,7 +13,8 @@ class Goods extends Component{
 	constructor(props){
 		super(props)
 		this.state={
-			jump:false
+			jump:false,
+			id:0
 		}
 	}
 
@@ -23,17 +24,29 @@ class Goods extends Component{
 			eventId:this.props.eventid,
 			iid:item.iid,
 			goodsName:item.title,
-			price:item.price,
-			ori_price:item.price_ori
+			price:item.price?item.price:item.group_price,
+			ori_price:item.price_ori?item.price_ori:item.origin_price
 		})
-
+		this.setState({
+			id:item.iid
+		})
 		this.setState({
 			jump:true
 		})
 	}
+	componentWillMount(){
+		this.setState({
+			jump:false
+		})
+	}
 	render(){
 		if(this.state.jump){
-			return <Redirect push to="/detail" />;
+			if(window.location.pathname=="/detail"){
+				return <Redirect push to="/detail" />;
+			}else{
+				return <Redirect push to="/recomment" />;
+			}
+
 		}
 
 		let _data = []
@@ -44,8 +57,8 @@ class Goods extends Component{
 						<img src={items.img}/>
 					</div>
 					<div className="price">
-						<span className="now-price">{toDecimal(items.price)}</span>
-						<span className="ori-price">{toDecimal(items.price_ori)}</span>
+						<span className="now-price">{items.price?toDecimal(items.price):toDecimal(items.group_price)}</span>
+						<span className="ori-price">{items.price_ori?toDecimal(items.price_ori):toDecimal(items.origin_price)}</span>
 						<span className="discount">{items.sale_tip?items.sale_tip:""}</span>
 					</div>
 					<div className="short-desc">

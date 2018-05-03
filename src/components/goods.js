@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {getGoodsinfo} from "../redux/goodsinfo";
 
 @connect(
-	null,
+	state=>state.goods,
 	{getGoodsinfo}
 )
 class Goods extends Component{
@@ -30,23 +30,15 @@ class Goods extends Component{
 		this.setState({
 			id:item.iid
 		})
-		this.setState({
-			jump:true
-		})
-	}
-	componentWillMount(){
-		this.setState({
-			jump:false
-		})
+		if(window.location.pathname!="/detail"){
+			this.setState({
+				jump:true
+			})
+		}
 	}
 	render(){
 		if(this.state.jump){
-			if(window.location.pathname=="/detail"){
-				return <Redirect push to="/detail" />;
-			}else{
-				return <Redirect push to="/recomment" />;
-			}
-
+			return <Redirect push to="/detail" />
 		}
 
 		let _data = []

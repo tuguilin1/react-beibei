@@ -3,6 +3,14 @@ import axios from "axios"
 import toDecimal from "../js/price"
 import { Carousel, WingBlank } from 'antd-mobile';
 import "./swiper.css"
+import {connect} from 'react-redux'
+import {getGoodsinfo} from "../redux/goodsinfo";
+
+
+@connect(
+	state=>state.goods,
+	{getGoodsinfo}
+)
 
 class Swiper extends Component{
 	constructor(props){
@@ -11,7 +19,17 @@ class Swiper extends Component{
 			data:[]
 		}
 	}
-	componentDidMount(){
+	jumpUrl(item){
+		this.props.getGoodsinfo({
+			goodsImg:item.img,
+			eventId:this.props.event_id,
+			iid:item.iid,
+			goodsName:item.title,
+			price:item.price?item.price:item.group_price,
+			ori_price:item.price_ori?item.price_ori:item.origin_price
+		})
+	}
+	update(){
 		const url = `/gateway/route.html`
 		const data={
 			method: 'beibei.recom.list.get',
@@ -33,24 +51,18 @@ class Swiper extends Component{
 				arr[num]=list.splice(0,3)
 			}
 			this.setState({
-				data:arr
-			})
-		})
-	}
-	render(){
-		return(
-		    <WingBlank>
+				data:   <WingBlank>
 		        <Carousel
 		          autoplay={true}
 		          infinite
 		          slideWidth = {1}
 		          dotActiveStyle={{color:'#ff4965'}}
 		        >
-		          {this.state.data.map((val,index) => (
+		          {arr.map((val,index) => (
 		          	<a  key={index}>
 		          			<div className="reco-swiper">
 		          			{val.map((item,k)=>(
-			          			<div className="reco-goods" key={k}>
+			          			<div className="reco-goods" key={k} onClick={()=>{this.jumpUrl(item)}}>
 			          				<div className="reco-img">
 			          					<img src={item.img} />
 			          				</div>
@@ -67,6 +79,20 @@ class Swiper extends Component{
 		          ))}
 		        </Carousel>
 		    </WingBlank>
+			})
+		})
+	}
+	componentDidMount(){
+		this.update()
+	}
+	componentWillReceiveProps(){
+		this.update()
+	}
+	render(){
+		return(
+			<div>
+		 	{this.state.data}
+		 	</div>
 		)
 	}
 }

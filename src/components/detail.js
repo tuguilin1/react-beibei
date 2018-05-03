@@ -34,7 +34,19 @@ class Detail extends Component{
 			page:event.target.innerHTML
 		})
 	}
-	componentDidMount(){
+	update(){
+		console.log(this.props.iid)
+		this.setState({
+			urlList:{
+				'9.9秒杀':'https://sapi.beibei.com/fightgroup/nine_freeship/1-50-99.html',
+				"母婴":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-3_5_7-1-50.html`,
+				"百货":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-393_1285_1648-1-50.html`,
+				"童装":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-2_1230-1-50.html`,
+				"食品":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-328_1242-1-50.html`,
+				"美妆":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-591-1-50.html`,
+				"服饰":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-6_449_562_571_1454_1455_1472_1485_1552-1-50.html`
+			}
+		})
 		const url = `https://sapi.beibei.com/item/rate/0-${this.props.iid}-1-10.html`
 		getData(url,"BeibeiItemRateGet").then((data)=>{
 			if(data.page)
@@ -101,19 +113,28 @@ class Detail extends Component{
 							<Comments list={data.rate_items.slice(0,2)}/>
 						</div>
 						<Button>查看全部评价</Button>
+						<header className="reco-goods">  大家还买了</header>
+						<Swiper event_id={this.props.eventId} iid={this.props.iid} />
 					</div>
 			})
 		})
+
+	}
+	componentWillReceiveProps(){
+		this.update();
+		window.scrollTo(0,0)
+	}
+	componentDidMount(){
+		this.update()
 	}
 
 	render(){
 		return(
 			<div>
 				{this.state.goods}
-				<header className="reco-goods">  大家还买了</header>
-				<Swiper event_id={this.props.eventId} iid={this.props.iid} />
+
 				<Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
-				<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/>
+				<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param={this.state.page=="9.9秒杀"?"BeibeiFightgroupNineFreeshipGet":"BeibeiFightgroupItemMoreByCidsGet"}/>
 
 			</div>
 		)

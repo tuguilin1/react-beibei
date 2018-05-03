@@ -5,11 +5,14 @@ class Nav extends Component{
 	constructor(props){
 		super(props)
 	}
+	underLine(event){
+		console.log(event)
+	}
 	render(){
 		let num = this.props.data.length;
 		const items=[];
 		while(num--){
-			items.push(<div key={num}>{this.props.data[num]}</div>);
+			items.push(<div onClick={this.underLine} data-num={num} key={num}>{this.props.data[num]}</div>);
 		};
 		return(
 			<div className="outer-container">

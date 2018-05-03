@@ -11,6 +11,7 @@ import Swiper from "./swiper"
 import Nav from "./nav.js"
 import Recommend from "./recommend"
 @connect( state=>state.goods )
+
 class Detail extends Component{
 	constructor(props){
 		super(props)
@@ -134,7 +135,7 @@ class Detail extends Component{
 				{this.state.goods}
 
 				<Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
-				<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param={this.state.page=="9.9秒杀"?"BeibeiFightgroupNineFreeshipGet":"BeibeiFightgroupItemMoreByCidsGet"}/>
+				<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/>
 
 			</div>
 		)

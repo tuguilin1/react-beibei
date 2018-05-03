@@ -28,8 +28,12 @@ class Recommend extends Component{
 	// 	this.props.getShopinfo({shopName:item.brand_name,buyInfo:item.buying_info,shopImg:item.brand_logo});
 	// }
 	handlePage(page = this.props.page){
+		let param = this.props.param;
+		if(page=="9.9秒杀"){
+			param ="BeibeiFightgroupNineFreeshipGet"
+		}
 		const url = this.props.list[page]
-		getData(url,this.props.param).then((data)=>{
+		getData(url,param).then((data)=>{
 			if(data.martshow_items){
 				this.setState({
 					list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>

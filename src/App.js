@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomePage from './components/homepage';
 import Brand from './components/brand'
 import Detail from "./components/detail"
-
+import "./css/iconfont.css"
 import { BrowserRouter, Route, Redirect,Switch } from 'react-router-dom'
 
 

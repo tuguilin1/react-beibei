@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import toDecimal from "../js/price"
 import "./goods.css"
-import { Link,Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux'
 import {getGoodsinfo} from "../redux/goodsinfo";
 
@@ -30,7 +30,7 @@ class Goods extends Component{
 		this.setState({
 			id:item.iid
 		})
-		if(window.location.pathname!="/detail"){
+		if(window.location.pathname!=="/detail"){
 			this.setState({
 				jump:true
 			})

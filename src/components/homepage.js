@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import Header from "./header"
 import Nav from "./nav"
 import Shop from "./shop"
+import Footer from "./footer"
 class HomePage extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			page:"推荐"
+			page:"推荐",
+			nav:{
+				"今日特卖":"iconfont icon-icon019",
+				"拼团":"iconfont icon-icon019",
+				"购物车":"iconfont icon-icon019",
+				"我的":"iconfont icon-icon019"}
 		}
 	}
 	handleClick(event){
@@ -14,6 +20,7 @@ class HomePage extends Component{
 			page:event.target.innerHTML
 		})
 	}
+
 	render(){
 		const navList = this.props.data||["推荐","童装","童鞋","婴童用品","女包","鞋包","居家","美妆","美食","下期预告"].reverse();
 		const List =this.props.list||{
@@ -32,6 +39,7 @@ class HomePage extends Component{
 				<Nav data={navList} handleClick = {this.handleClick.bind(this)} />
 				<Header/>
 				<Shop page={this.state.page} list={List} param={this.props.param}/>
+				<Footer nav={this.state.nav}/>
 			</div>
 		)
 	}

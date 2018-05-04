@@ -7,7 +7,11 @@ const initState={
 	iid:2,
 	goodsName:"",
 	price:"",
-	ori_price:""
+	ori_price:"",
+	count:"",
+	rate:"",
+	rate_tags:"",
+	rate_items:""
 }
 
 

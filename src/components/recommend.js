@@ -18,10 +18,8 @@ class Recommend extends Component{
 		}
 		this.handlePage.bind(this)
 	}
-	componentWillMount(){
-		this.handlePage()
-	}
 	componentWillReceiveProps(nextprops){
+		console.log(nextprops.page)
 		this.handlePage(nextprops.page)
 	}
 	// jump(item){

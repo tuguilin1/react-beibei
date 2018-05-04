@@ -42,7 +42,7 @@ class Shop extends Component{
 								<Icon type="right" className="right"/>
 							</header>
 							<section>
-								<Goods data={items[items.type].items}/>
+								<Goods data={items[items.type].items} eventid={items[items.type].event_id}/>
 							</section>
 						</div></Link>)
 				})

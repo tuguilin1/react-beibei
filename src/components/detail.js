@@ -5,20 +5,19 @@ import { Tag } from 'antd-mobile';
 import Comments from "./commonts"
 import axios from "axios"
 import "./detail.css"
-import getData from "../api/jsonp"
+import {getSwiperinfo} from "../redux/swiperinfo";
 import toDecimal from "../js/price"
 import Swiper from "./swiper"
 import Nav from "./nav.js"
 import Recommend from "./recommend"
-@connect( state=>state.goods )
+@connect( state=>state.goods,{getSwiperinfo} )
 
 class Detail extends Component{
 	constructor(props){
 		super(props)
 		this.state={
-			goods:"",
 			list:["9.9秒杀",'母婴','百货','童装','食品','美妆','服饰'].reverse(),
-			page:"9.9秒杀",
+			
 			urlList:{
 				'9.9秒杀':'https://sapi.beibei.com/fightgroup/nine_freeship/1-50-99.html',
 				"母婴":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-3_5_7-1-50.html`,
@@ -27,7 +26,8 @@ class Detail extends Component{
 				"食品":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-328_1242-1-50.html`,
 				"美妆":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-591-1-50.html`,
 				"服饰":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-6_449_562_571_1454_1455_1472_1485_1552-1-50.html`
-			}
+			},
+			page:"9.9秒杀"
 		}
 	}
 	handleClick(event){
@@ -36,23 +36,40 @@ class Detail extends Component{
 		})
 	}
 	update(){
-		console.log(this.props.iid)
-		this.setState({
-			urlList:{
-				'9.9秒杀':'https://sapi.beibei.com/fightgroup/nine_freeship/1-50-99.html',
-				"母婴":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-3_5_7-1-50.html`,
-				"百货":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-393_1285_1648-1-50.html`,
-				"童装":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-2_1230-1-50.html`,
-				"食品":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-328_1242-1-50.html`,
-				"美妆":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-591-1-50.html`,
-				"服饰":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-6_449_562_571_1454_1455_1472_1485_1552-1-50.html`
+		const url = `/gateway/route.html`
+		const data={
+			method: 'beibei.recom.list.get',
+			scene_id: 'app_item_detail_bei_ma_recom',
+			iid: this.props.iid,
+			event_id: this.props.eventId,
+			uid: 0
+		}
+		axios.get(url,{
+			params:data
+		}).then((data)=>{
+			let list = data.data.recom_items.map((v)=>{
+				return v
+			}).reverse()
+			let num = data.data.recom_items.length/3;
+			let arr = new Array
+			while(num--){
+
+				arr[num]=list.splice(0,3)
 			}
+			this.props.getSwiperinfo({
+				swiperData:arr
+			})
 		})
-		const url = `https://sapi.beibei.com/item/rate/0-${this.props.iid}-1-10.html`
-		getData(url,"BeibeiItemRateGet").then((data)=>{
-			if(data.page)
-			this.setState({
-				goods:<div className="detail">
+
+	}
+	componentWillReceiveProps(){
+		this.update()
+		window.scrollTo(0,0)
+	}
+	render(){
+		return(
+			<div>
+				<div className="detail">
 						<div className="goodsImg">
 							<img src={this.props.goodsImg} />
 						</div>
@@ -94,45 +111,31 @@ class Detail extends Component{
 								</span>
 							</div>
 						</div>
-						<div className="evaluate">
-							<header>
-								<span>
-									买家评价({data.count})
-								</span>
-								<span>
-									好评率({data.favourable_comment.rate})
-								</span>
-							</header>
-							<div className="evaluate-tag">
-								{data.rate_tags?data.rate_tags.map((item,index)=>{
-									return <Tag key={index}>{item.name}({item.count})</Tag>
-								}):""}
+						<div>			
+							<div className="evaluate">
+								<header>
+									<span>
+										买家评价({this.props.count})
+									</span>
+									<span>
+										好评率({this.props.rate})
+									</span>
+								</header>
+								<div className="evaluate-tag">
+									{this.props.rate_tags?this.props.rate_tags.map((item,index)=>{
+										return <Tag key={index}>{item.name}({item.count})</Tag>
+									}):""}
+								</div>
 							</div>
-						</div>
-						<div>
+							<div>
 
-							<Comments list={data.rate_items.slice(0,2)}/>
+								<Comments list={this.props.rate_items.slice(0,2)}/>
+							</div>
 						</div>
 						<Button>查看全部评价</Button>
 						<header className="reco-goods">  大家还买了</header>
 						<Swiper event_id={this.props.eventId} iid={this.props.iid} />
 					</div>
-			})
-		})
-
-	}
-	componentWillReceiveProps(){
-		this.update();
-		window.scrollTo(0,0)
-	}
-	componentDidMount(){
-		this.update()
-	}
-
-	render(){
-		return(
-			<div>
-				{this.state.goods}
 
 				<Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
 				<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/>

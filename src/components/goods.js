@@ -4,9 +4,10 @@ import "./goods.css"
 import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux'
 import {getGoodsinfo} from "../redux/goodsinfo";
-
+import getData from "../api/jsonp"
+import LazyLoad from 'react-lazyload';
 @connect(
-	state=>state.goods,
+	null,
 	{getGoodsinfo}
 )
 class Goods extends Component{
@@ -19,14 +20,25 @@ class Goods extends Component{
 	}
 
 	jumpUrl(item){
-		this.props.getGoodsinfo({
-			goodsImg:item.img,
-			eventId:this.props.eventid,
-			iid:item.iid,
-			goodsName:item.title,
-			price:item.price?item.price:item.group_price,
-			ori_price:item.price_ori?item.price_ori:item.origin_price
+		const url = `https://sapi.beibei.com/item/rate/0-${item.iid}-1-10.html`
+		getData(url,"BeibeiItemRateGet").then((data)=>{
+			if(data.page){
+				this.props.getGoodsinfo({
+					goodsImg:item.img,
+					eventId:this.props.eventid,
+					iid:item.iid,
+					goodsName:item.title,
+					price:item.price?item.price:item.group_price,
+					ori_price:item.price_ori?item.price_ori:item.origin_price,
+					count:data.count,
+					rate:data.count?data.favourable_comment.rate:"",
+					rate_tags:data.count?data.rate_tags:"",
+					rate_items:data.count?data.rate_items:[]
+				})
+			}
+			
 		})
+
 		this.setState({
 			id:item.iid
 		})
@@ -46,7 +58,9 @@ class Goods extends Component{
 			return(
 				<div className="goods" key={index} onClick={()=>{this.jumpUrl(items)}}>
 					<div className="image">
-						<img src={items.img}/>
+						<LazyLoad>
+							<img src={items.img}/>
+						</LazyLoad>
 					</div>
 					<div className="price">
 						<span className="now-price">{items.price?toDecimal(items.price):toDecimal(items.group_price)}</span>

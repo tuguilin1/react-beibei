@@ -3,6 +3,8 @@ import Header from "./header"
 import Nav from "./nav"
 import Shop from "./shop"
 import Footer from "./footer"
+import { Icon } from 'antd-mobile';
+import { Link} from "react-router-dom";
 class HomePage extends Component{
 	constructor(props){
 		super(props)
@@ -36,6 +38,7 @@ class HomePage extends Component{
 		}
 		return(
 			<div>
+				<Link to="/Classify"><div className="search"><Icon type="search" /></div></Link>
 				<Nav data={navList} handleClick = {this.handleClick.bind(this)} />
 				<Header/>
 				<Shop page={this.state.page} list={List} param={this.props.param}/>

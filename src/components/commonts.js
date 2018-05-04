@@ -6,7 +6,7 @@ class Comments extends Component{
 	}
 	render(){
 
-		let comments = this.props.list.map((item,index)=>{
+		let comments =this.props.list.length?this.props.list.map((item,index)=>{
 			return 	<div className="comments" key={index}>
 						<img src={item.avatar} />
 						<div className="user-info">
@@ -18,7 +18,7 @@ class Comments extends Component{
 							</div>
 						</div>
 					</div>
-		})
+		}):""
 
 		return(
 			<div>

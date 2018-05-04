@@ -12,7 +12,7 @@
 }
 
 .outer-container{
-	height: 4rem;
+	height: 3.6rem;
 	overflow: hidden;
 }
 
@@ -26,5 +26,16 @@ nav div{
 
 .active{
 	color:#ff4965;
-	border-bottom: 0.2rem solid #ff4965;
+	border-bottom: 0.4rem solid #ff4965;
+}
+
+.search{
+	position: absolute;
+	right: 0;
+	top:0;
+	background: #EEE;
+	height: 4rem;
+	width: 2rem;
+	line-height: 4rem;
+	text-align: center;
 }

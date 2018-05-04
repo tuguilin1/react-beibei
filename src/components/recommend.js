@@ -36,10 +36,14 @@ class Recommend extends Component{
 				this.setState({
 					list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>
 				})			
-			}else if(data.count){
+			}else if(data.fightgroup_items){
 				this.setState({
 					list:<Goods eventid={this.props.eventid} data={data.fightgroup_items}/>
 				})	
+			}else if(data.search_items){
+				this.setState({
+					list:<Goods eventid={this.props.eventid} data={data.search_items}/>
+				})
 			}
 
 		})

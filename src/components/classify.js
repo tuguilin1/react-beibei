@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SearchBar,WingBlank } from 'antd-mobile';
 import { Icon, Grid } from 'antd-mobile';
 import getData from "../api/jsonp"
+import { Link } from "react-router-dom";
 class Classify extends Component{
 	constructor(props){
 		super(props);
@@ -20,7 +21,8 @@ class Classify extends Component{
 					title.push(items.category_name)
 					arr.push(items.subdivision_categorys.map((item,key)=>({
 						icon:item.img,
-						text:item.title
+						text:item.title,
+						data:item.data
 					})))
 				})
 			}
@@ -28,13 +30,14 @@ class Classify extends Component{
 				name:title,
 				list:arr
 			},()=>{
+				console.log(this.state.list)
 				this.setState({
 					content:this.state.list.map((items,key)=>{
 						return(
-							<div key={key}>
+							<Link to={"/product/"+items['data']} key={key}>
 							<header>{this.state.name[key]}</header>
 							<Grid data={items}></Grid>
-							</div>
+							</Link>
 						)
 					})
 				})

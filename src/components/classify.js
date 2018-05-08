@@ -3,14 +3,23 @@ import { SearchBar,WingBlank } from 'antd-mobile';
 import { Icon, Grid } from 'antd-mobile';
 import getData from "../api/jsonp"
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 class Classify extends Component{
 	constructor(props){
 		super(props);
 		this.state={
 			list:[],
 			name:[],
-			content:""
+			content:"",
+			jump:false,
+			url:''
 		}
+	}
+	jumpUrl(el){
+		this.setState({
+			url:el.data,
+			jump:true
+		})
 	}
 	componentDidMount(){
 		const url = 'https://sapi.beibei.com/item/category-1.html'
@@ -34,10 +43,10 @@ class Classify extends Component{
 				this.setState({
 					content:this.state.list.map((items,key)=>{
 						return(
-							<Link to={"/product/"+items['data']} key={key}>
+							<div key={key}>
 							<header>{this.state.name[key]}</header>
-							<Grid data={items}></Grid>
-							</Link>
+							<Grid data={items} onClick={(el)=>{this.jumpUrl(el)}}></Grid>
+							</div>
 						)
 					})
 				})
@@ -45,6 +54,12 @@ class Classify extends Component{
 		})
 	}
 	render(){
+		if(this.state.jump){
+			return (
+				<Redirect push to={"/product/" + this.state.url}/>
+			)
+		}
+
 		return(
 			<div>
 				<WingBlank>

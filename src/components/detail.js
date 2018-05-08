@@ -10,7 +10,7 @@ import toDecimal from "../js/price"
 import Swiper from "./swiper"
 import Nav from "./nav.js"
 import Recommend from "./recommend"
-@connect( state=>state.goods,{getSwiperinfo} )
+@connect( state=>state.goods )
 
 class Detail extends Component{
 	constructor(props){
@@ -35,35 +35,7 @@ class Detail extends Component{
 			page:event.target.innerHTML
 		})
 	}
-	update(){
-		const url = `/gateway/route.html`
-		const data={
-			method: 'beibei.recom.list.get',
-			scene_id: 'app_item_detail_bei_ma_recom',
-			iid: this.props.iid,
-			event_id: this.props.eventId,
-			uid: 0
-		}
-		axios.get(url,{
-			params:data
-		}).then((data)=>{
-			let list = data.data.recom_items.map((v)=>{
-				return v
-			}).reverse()
-			let num = data.data.recom_items.length/3;
-			let arr = new Array
-			while(num--){
-
-				arr[num]=list.splice(0,3)
-			}
-			this.props.getSwiperinfo({
-				swiperData:arr
-			})
-		})
-
-	}
 	componentWillReceiveProps(){
-		this.update()
 		window.scrollTo(0,0)
 	}
 	render(){
@@ -133,12 +105,11 @@ class Detail extends Component{
 							</div>
 						</div>
 						<Button>查看全部评价</Button>
-						<header className="reco-goods">  大家还买了</header>
-						<Swiper event_id={this.props.eventId} iid={this.props.iid} />
+						{this.props.eventId?<div><header className="reco-goods">  大家还买了</header><Swiper event_id={this.props.eventId} iid={this.props.iid}/></div>:""}
 					</div>
 
-				<Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
-				<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/>
+				{this.props.eventId?<div><Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
+								<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/></div>:""}
 
 			</div>
 		)

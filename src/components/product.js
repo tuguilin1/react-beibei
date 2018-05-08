@@ -6,15 +6,20 @@ class Product extends Component{
 		super(props);
 		this.state={
 			urlList:{
-				"↓人气":`https://sapi.beibei.com/item/search/1-40-hot-${this.props.match.params.name}-0--.html`,
-				"↑价格":`https://sapi.beibei.com/item/search/1-40-price-${this.props.match.params.name}-0--.html`
+				"↓人气":`https://sapi.beibei.com/item/search/1-40-hot-${this.props.match.params.id}-0--.html`,
+				"↑价格":`https://sapi.beibei.com/item/search/1-40-price-${this.props.match.params.id}-0--.html`
 			},
-			page:""
+			page:"↓人气",
 		}
 	}
 	handleClick(event){
 		this.setState({
 			page:event.target.innerHTML
+		})
+	}
+	componentDidMount(){
+		this.setState({
+			page:"↓人气"
 		})
 	}
 	render(){

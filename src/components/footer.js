@@ -30,6 +30,7 @@ class Footer extends Component{
 				  })),
 		 	len:Object.keys(this.props.nav).length
 		 })
+
 	}
 	componentDidMount(){
 		this.update()

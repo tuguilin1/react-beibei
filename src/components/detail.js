@@ -10,6 +10,7 @@ import toDecimal from "../js/price"
 import Swiper from "./swiper"
 import Nav from "./nav.js"
 import Recommend from "./recommend"
+import Bottomnav from "./bottom_nav"
 @connect( state=>state.goods )
 
 class Detail extends Component{
@@ -110,7 +111,7 @@ class Detail extends Component{
 
 				{this.props.eventId?<div><Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
 								<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/></div>:""}
-
+				<Bottomnav msg1 ="加入购物车" msg2="立即购买" color="black" iid={this.props.iid} />
 			</div>
 		)
 	}

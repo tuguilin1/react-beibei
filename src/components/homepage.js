@@ -24,7 +24,7 @@ class HomePage extends Component{
 	}
 
 	render(){
-		const navList = this.props.data||["推荐","童装","童鞋","婴童用品","女包","鞋包","居家","美妆","美食","下期预告"].reverse();
+		const navList = this.props.data||["推荐","童装","童鞋","婴童用品","女包","鞋包","居家","美妆","美食"].reverse();
 		const List =this.props.list||{
 			"推荐":"https://sapi.beibei.com/martshow/new/1-1.html",
 			"童装":"https://sapi.beibei.com/martshow/channel/1-dress---0.html",

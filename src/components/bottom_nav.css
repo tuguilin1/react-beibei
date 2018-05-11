@@ -1,0 +1,46 @@
+.bottom-nav{
+	height: 3rem;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	background: #EEE;
+}
+
+.bottom-left-nav{
+	flex: 4;
+	color:#3d3d3d;
+}
+
+.shopping{
+	flex: 3;
+	height: 3rem;
+	line-height: 3rem;
+	font-style: 1.6rem;
+	text-align: center;
+	background: #ff4965;
+	color:white;
+	font-weight: bolder;
+}
+
+.black{
+	background: black;
+}
+
+.purchase-panel{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top:0;
+	width: 100%;
+	background: rgba(0,0,0,0.2);
+}
+
+.select{
+	width: 100%;
+	min-height: 20rem;
+	background: #FFF;
+	position: fixed;
+	bottom: 0;
+}

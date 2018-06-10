@@ -5,6 +5,7 @@
 	bottom: 0;
 	display: flex;
 	background: #EEE;
+	z-index: 20;
 }
 
 .bottom-left-nav{
@@ -27,7 +28,7 @@
 	background: black;
 }
 
-.purchase-panel{
+/*.purchase-panel{
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -43,4 +44,4 @@
 	background: #FFF;
 	position: fixed;
 	bottom: 0;
-}
+}*/

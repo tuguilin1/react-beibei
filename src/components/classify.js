@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SearchBar,WingBlank } from 'antd-mobile';
 import { Icon, Grid } from 'antd-mobile';
-import getData from "../api/jsonp"
+import {getRecommendData} from "../api/jsonp"
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 class Classify extends Component{
@@ -23,7 +23,7 @@ class Classify extends Component{
 	}
 	componentDidMount(){
 		const url = 'https://sapi.beibei.com/item/category-1.html'
-		getData(url,"BeibeiItemCategoryGet").then((data)=>{
+		getRecommendData(url,"BeibeiItemCategoryGet").then((data)=>{
 			let title=[],arr=[];
 			if(data.success){
 				data.main_categorys.map((items,index)=>{

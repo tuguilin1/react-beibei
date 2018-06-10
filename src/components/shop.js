@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd-mobile'
 import {connect} from 'react-redux'
-import getData from "../api/jsonp"
+import { getData } from "../api/jsonp"
 import Goods from "./goods"
 import "./shop.css"
 import {getShopinfo} from "../redux/shopinfo";
@@ -30,21 +30,14 @@ class Shop extends Component{
 	}
 	handlePage(page = this.props.page){
 		const url = this.props.list[page]
-		getData(url,this.props.param).then((data)=>{
+		getData(url,{client_info: undefined,h5_uid: undefined}).then((data)=>{
 			this.setState({
-				list:data.martshows.map((items,index)=>{
+				list:data.data.martshows.slice(2).map((items,index)=>{
 					return(			
-						<Link key={index} to={'/brand/'+items[items.type].event_id}><div  onClick = {()=>{this.jump(items[items.type])}}>
-							<header className="head">
-								<img src={items[items.type].brand_logo} />
-								{items[items.type].brand_name}
-								<span>{items[items.type].title}</span>
-								<Icon type="right" className="right"/>
-							</header>
-							<section>
+							<section key={index}>
 								<Goods data={items[items.type].items} eventid={items[items.type].event_id}/>
 							</section>
-						</div></Link>)
+							)
 				})
 			})
 		})

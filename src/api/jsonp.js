@@ -1,7 +1,7 @@
 import jsonp from "jsonp"
+import axios from "axios"
 
-
-var getData = function(url,param=""){
+var getRecommendData = function(url,param=""){
 	return new Promise((resolve,reject)=>{
 		let  name
 		/channel/i.test(url)?name = "BeibeiMartshowChannelGet":name = 'BeibeiMartshowNewGet'
@@ -20,5 +20,14 @@ var getData = function(url,param=""){
 	} )
 }
 
+var getData = function(url,param={}){
+	return new Promise((resolve,reject)=>{
+		axios.get(url,param).then((data)=>{
+			resolve(data)
+		})
 
-export default getData
+	} )
+}
+
+
+export {getData,getRecommendData}

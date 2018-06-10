@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import {connect} from 'react-redux'
-import getData from "../api/jsonp"
+import {getRecommendData} from "../api/jsonp"
 import Goods from "./goods"
 import "./shop.css"
 // import {getShopinfo} from "../redux/shopinfo";
@@ -30,7 +30,7 @@ class Recommend extends Component{
 			param ="BeibeiFightgroupNineFreeshipGet"
 		}
 		const url = this.props.list[page]
-		getData(url,param).then((data)=>{
+		getRecommendData(url,param).then((data)=>{
 			if(data.martshow_items){
 				this.setState({
 					list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>

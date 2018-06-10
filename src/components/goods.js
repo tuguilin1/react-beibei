@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux'
 import {getGoodsinfo} from "../redux/goodsinfo";
 import {getSwiperinfo} from "../redux/swiperinfo"
-import getData from "../api/jsonp"
+import {getRecommendData} from "../api/jsonp"
 import LazyLoad from 'react-lazyload';
 import axios from "axios"
 @connect(
@@ -23,7 +23,7 @@ class Goods extends Component{
 
 	jumpUrl(item){
 		const url = `https://sapi.beibei.com/item/rate/0-${item.iid}-1-10.html`
-		getData(url,"BeibeiItemRateGet").then((data)=>{
+		getRecommendData(url,"BeibeiItemRateGet").then((data)=>{
 			if(data.page){
 				this.props.getGoodsinfo({
 					goodsImg:item.img,
@@ -41,32 +41,32 @@ class Goods extends Component{
 			
 		})
 		console.log(this.props.eventid)
-		if(this.props.eventid !== ""){
-			const url2 = `/gateway/route.html`
-			const data={
-				method: 'beibei.recom.list.get',
-				scene_id: 'app_item_detail_bei_ma_recom',
-				iid: item.iid,
-				event_id: this.props.eventid,
-				uid: 0
-			}
-			axios.get(url2,{
-				params:data
-			}).then((data)=>{
-				let list = data.data.recom_items.map((v)=>{
-					return v
-				}).reverse()
-				let num = data.data.recom_items.length/3;
-				let arr = new Array
-				while(num--){
+		// if(this.props.eventid !== ""){
+		// 	const url2 = `/gateway/route.html`
+		// 	const data={
+		// 		method: 'beibei.recom.list.get',
+		// 		scene_id: 'app_item_detail_bei_ma_recom',
+		// 		iid: item.iid,
+		// 		event_id: this.props.eventid,
+		// 		uid: 0
+		// 	}
+		// 	axios.get(url2,{
+		// 		params:data
+		// 	}).then((data)=>{
+		// 		let list = data.data.recom_items.map((v)=>{
+		// 			return v
+		// 		}).reverse()
+		// 		let num = data.data.recom_items.length/3;
+		// 		let arr = new Array
+		// 		while(num--){
 
-					arr[num]=list.splice(0,3)
-				}
-				this.props.getSwiperinfo({
-					swiperData:arr
-				})
-			})
-		}
+		// 			arr[num]=list.splice(0,3)
+		// 		}
+		// 		this.props.getSwiperinfo({
+		// 			swiperData:arr
+		// 		})
+		// 	})
+		// }
 
 		this.setState({
 			id:item.iid
@@ -94,7 +94,7 @@ class Goods extends Component{
 					<div className="price">
 						<span className="now-price">{items.price?toDecimal(items.price):toDecimal(items.group_price)}</span>
 						<span className="ori-price">{items.price_ori?toDecimal(items.price_ori):toDecimal(items.origin_price)}</span>
-						<span className="discount">{items.sale_tip?items.sale_tip:""}</span>
+						<span className="discount">{items.buying_info?items.buying_info:""}</span>
 					</div>
 					<div className="short-desc">
 						{items.title}

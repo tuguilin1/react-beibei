@@ -5,7 +5,7 @@ import { Carousel, WingBlank } from 'antd-mobile';
 import "./swiper.css"
 import {connect} from 'react-redux'
 import {getGoodsinfo} from "../redux/goodsinfo";
-import getData from "../api/jsonp"
+import {getRecommendData} from "../api/jsonp"
 
 @connect(
 	state=>state.swiper,
@@ -21,7 +21,7 @@ class Swiper extends Component{
 	}
 	jumpUrl(item){
 		const url = `https://sapi.beibei.com/item/rate/0-${item.iid}-1-10.html`
-		getData(url,"BeibeiItemRateGet").then((data)=>{
+		getRecommendData(url,"BeibeiItemRateGet").then((data)=>{
 			if(data.page){
 				this.props.getGoodsinfo({
 					goodsImg:item.img,

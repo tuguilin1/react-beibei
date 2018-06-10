@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import HomePage from './components/homepage';
+import Personal from "./components/personal"
 import Brand from './components/brand'
 import Detail from "./components/detail"
 import Classify from "./components/classify"
 import "./css/iconfont.css"
 import LazyLoad from 'react-lazyload';
-import Product from "./components/product"
+import Product from "./components/product";
+import My from "./components/my"
 import { BrowserRouter, Route, Redirect,Switch } from 'react-router-dom'
 
 
@@ -21,7 +23,9 @@ class App extends Component {
             <Route path="/detail" component={Detail}></Route>
             <Route path="/Classify" component={Classify}></Route>
             <Route path="/product/:id" component={Product}></Route>
-    				<Redirect to='/index'></Redirect>
+            <Route path="/my" component={My}></Route>
+            <Route path="/personal" component={Personal}></Route>    				
+            <Redirect to='/index'></Redirect>
     			</Switch>
     		</BrowserRouter>
       </div>

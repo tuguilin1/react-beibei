@@ -9,7 +9,7 @@ class HomePage extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			page:"推荐",
+			page:"童装",
 			nav:{
 				"今日特卖":"iconfont icon-icon019",
 				"拼团":"iconfont icon-icon019",
@@ -24,24 +24,23 @@ class HomePage extends Component{
 	}
 
 	render(){
-		const navList = this.props.data||["推荐","童装","童鞋","婴童用品","女包","鞋包","居家","美妆","美食"].reverse();
+		const navList = this.props.data||["童装","母婴","鞋包","居家","美妆","美食","进口"].reverse();
 		const List =this.props.list||{
-			"推荐":"https://sapi.beibei.com/martshow/new/1-1.html",
-			"童装":"https://sapi.beibei.com/martshow/channel/1-dress---0.html",
-			"童鞋":"https://sapi.beibei.com/martshow/channel/1-shoes---0.html",
-			"婴童用品":"https://sapi.beibei.com/martshow/channel/1-daily_goods---0.html",
-			"女包":"https://sapi.beibei.com/martshow/channel/1-woman_dress---0.html",
-			"鞋包":"https://sapi.beibei.com/martshow/channel/1-woman_shoes_bags---0.html",
-			"居家":"https://sapi.beibei.com/martshow/channel/1-house---0.html",
-			"美妆":"https://sapi.beibei.com/martshow/channel/1-beauty---0.html",
-			"美食":"https://sapi.beibei.com/martshow/channel/1-food---0.html"
+			"童装":"/channel/7702-1-dress-1000.html",
+			"母婴":"/channel/7702-1-babythings-1000.html",
+			"鞋包":"/channel/7702-1-shoes_bag-1000.html",
+			"居家":"/channel/7702-1-house-1000.html",
+			"美妆":"/channel/7702-1-beauty-1000.html",
+			"美食":"/channel/7702-1-food-1000.html",
+			"女装":"/channel/7702-1-women_dress-1000.html",
+			"进口":"/channel/7702-1-oversea-1000.html"
 		}
 		return(
 			<div>
 				<Link to="/Classify"><div className="search"><Icon type="search" /></div></Link>
 				<Nav data={navList} handleClick = {this.handleClick.bind(this)} />
 				<Header/>
-				<Shop page={this.state.page} list={List} param={this.props.param}/>
+				<Shop page={this.state.page} list={List}/>
 				<Footer nav={this.state.nav}/>
 			</div>
 		)

@@ -21,6 +21,7 @@
     "babel-plugin-import": "^1.7.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "jsonp": "^0.2.1",
+    "prop-types": "^15.6.1",
     "pubsub-js": "^1.6.0",
     "react-app-rewired": "^1.5.1",
     "react-lazyload": "^2.3.0",
@@ -40,6 +41,10 @@
     },
     "/ads/h5.html": {
       "target": "https://dsapi.beibei.com",
+      "changeOrigin": true
+    },
+    "/channel": {
+      "target": "https://dsapi.beibei.com/martshow/home",
       "changeOrigin": true
     }
   }

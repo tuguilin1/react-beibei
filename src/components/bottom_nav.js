@@ -20,6 +20,7 @@ class Bottomnav extends Component{
 		}
 	}
 	getPrice(){
+		console.log(1)
 		axios.get("/mroute.html",{
 			params:{
 				method:"beibei.item.stock.get",
@@ -32,7 +33,6 @@ class Bottomnav extends Component{
 
 	render(){
 		return(
-			<div>
 			<div className="bottom-nav">
 				<div className="bottom-left-nav">
 					<Grid itemStyle={{height:"3rem"}}  data={this.state.data} columnNum={3}/>
@@ -44,10 +44,6 @@ class Bottomnav extends Component{
 					{this.props.msg2}
 				</div>
 
-			</div>
-			<div className="purchase-panel">
-				<div className="select"></div>
-			</div>
 			</div>
 		)
 	}

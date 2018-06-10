@@ -7,7 +7,7 @@ class Header extends Component{
 	}
 	render(){
 		return(
-			<header>今日必买 • 早晚9点特卖</header>
+			<header>{typeof this.props.title === "undefined"?"今日必买 • 早晚9点特卖":this.props.title}</header>
 		)
 	}
 }

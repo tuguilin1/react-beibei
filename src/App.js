@@ -8,6 +8,7 @@ import "./css/iconfont.css"
 import LazyLoad from 'react-lazyload';
 import Product from "./components/product";
 import My from "./components/my"
+import Groupbuying from "./components/group_buying"
 import { BrowserRouter, Route, Redirect,Switch } from 'react-router-dom'
 
 
@@ -24,8 +25,10 @@ class App extends Component {
             <Route path="/Classify" component={Classify}></Route>
             <Route path="/product/:id" component={Product}></Route>
             <Route path="/my" component={My}></Route>
-            <Route path="/personal/:phone" component={Personal}></Route>    				
+            <Route path="/personal/:phone" component={Personal}></Route>   
+            <Route path="/group_buying" component={Groupbuying}></Route>			
             <Redirect to='/index'></Redirect>
+
     			</Switch>
     		</BrowserRouter>
       </div>

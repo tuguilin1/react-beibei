@@ -9,7 +9,6 @@ import {getSwiperinfo} from "../redux/swiperinfo";
 import toDecimal from "../js/price"
 import Swiper from "./swiper"
 import Nav from "./nav.js"
-import Recommend from "./recommend"
 import Bottomnav from "./bottom_nav"
 @connect( state=>state.goods )
 
@@ -108,9 +107,6 @@ class Detail extends Component{
 						<Button>查看全部评价</Button>
 						{this.props.eventId?<div><header className="reco-goods">  大家还买了</header><Swiper event_id={this.props.eventId} iid={this.props.iid}/></div>:""}
 					</div>
-
-				{this.props.eventId?<div><Nav data={this.state.list} handleClick = {this.handleClick.bind(this)}/>
-								<Recommend page={this.state.page} eventid={this.props.eventId} list={this.state.urlList} param="BeibeiFightgroupItemMoreByCidsGet"/></div>:""}
 				<Bottomnav msg1 ="加入购物车" msg2="立即购买" color="black" iid={this.props.iid} />
 			</div>
 		)

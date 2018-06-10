@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
-// import {connect} from 'react-redux'
+import {connect} from 'react-redux'
 import {getRecommendData} from "../api/jsonp"
 import Goods from "./goods"
 import "./shop.css"
-// import {getShopinfo} from "../redux/shopinfo";
+import Swiper from "./swiper"
+import {getSwiperinfo} from "../redux/swiperinfo";
 // import { Link} from "react-router-dom";
-// @connect(
-// 	null,
-// 	{getShopinfo}
-// )
+@connect(
+	null,
+	{getSwiperinfo}
+)
 class Recommend extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
 			list:[],
 			tag:"",
+			items:""
 		}
 		this.handlePage.bind(this)
 	}
+	componentDidMount(){
+		this.handlePage()
+	}
 	componentWillReceiveProps(nextprops){
+		console.log(nextprops)
 		this.handlePage(nextprops.page)
 	}
 	// jump(item){
@@ -31,6 +37,20 @@ class Recommend extends Component{
 		}
 		const url = this.props.list[page]
 		getRecommendData(url,param).then((data)=>{
+			if(typeof data.hot_datas !=="undefined"){
+					let list = data.hot_datas.hot_items.slice(0,9).map((v)=>{
+						return v
+					}).reverse()
+					let num = 3;
+					let arr = new Array
+					while(num--){
+
+						arr[num]=list.splice(0,3)
+					}
+					this.props.getSwiperinfo({
+						swiperData:arr
+					})
+			}
 			if(data.martshow_items){
 				this.setState({
 					list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>
@@ -50,6 +70,7 @@ class Recommend extends Component{
 	render(){
 		return(
 			<div>
+				<Swiper ></Swiper>
 				{this.state.list}
 			</div>
 		)

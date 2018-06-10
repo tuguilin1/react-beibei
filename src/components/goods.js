@@ -41,32 +41,32 @@ class Goods extends Component{
 			
 		})
 		console.log(this.props.eventid)
-		// if(this.props.eventid !== ""){
-		// 	const url2 = `/gateway/route.html`
-		// 	const data={
-		// 		method: 'beibei.recom.list.get',
-		// 		scene_id: 'app_item_detail_bei_ma_recom',
-		// 		iid: item.iid,
-		// 		event_id: this.props.eventid,
-		// 		uid: 0
-		// 	}
-		// 	axios.get(url2,{
-		// 		params:data
-		// 	}).then((data)=>{
-		// 		let list = data.data.recom_items.map((v)=>{
-		// 			return v
-		// 		}).reverse()
-		// 		let num = data.data.recom_items.length/3;
-		// 		let arr = new Array
-		// 		while(num--){
+		if(typeof this.props.eventid !== "undefined"){
+			const url2 = `/gateway/route.html`
+			const data={
+				method: 'beibei.recom.list.get',
+				scene_id: 'app_item_detail_bei_ma_recom',
+				iid: item.iid,
+				event_id: this.props.eventid,
+				uid: 0
+			}
+			axios.get(url2,{
+				params:data
+			}).then((data)=>{
+				let list = data.data.recom_items.map((v)=>{
+					return v
+				}).reverse()
+				let num = data.data.recom_items.length/3;
+				let arr = new Array
+				while(num--){
 
-		// 			arr[num]=list.splice(0,3)
-		// 		}
-		// 		this.props.getSwiperinfo({
-		// 			swiperData:arr
-		// 		})
-		// 	})
-		// }
+					arr[num]=list.splice(0,3)
+				}
+				this.props.getSwiperinfo({
+					swiperData:arr
+				})
+			})
+		}
 
 		this.setState({
 			id:item.iid

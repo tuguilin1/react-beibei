@@ -19,6 +19,7 @@ class Swiper extends Component{
 			data:[]
 		}
 	}
+
 	jumpUrl(item){
 		const url = `https://sapi.beibei.com/item/rate/0-${item.iid}-1-10.html`
 		getRecommendData(url,"BeibeiItemRateGet").then((data)=>{
@@ -61,7 +62,7 @@ class Swiper extends Component{
 				          					{item.title}
 				          				</div>
 				          				<div className="reco-price">
-				          					{toDecimal(item.price)}
+				          					{toDecimal(item.origin_price)}
 				          				</div>
 				          			</div>
 			          			))}

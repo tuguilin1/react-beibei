@@ -29,11 +29,12 @@ class Footer extends Component{
 			case "今日热卖":
 				this.context.router.history.push("/index");
 			case "我的":
-				axios.post("http://127.0.0.1:3001/users").then((data)=>{
+				axios.post("http://localhost:3001/users/login").then((data)=>{
+					console.log(data)
 					if(data.data.status){
 						this.context.router.history.push("/my")
 					}else{
-						this.context.router.history.push("/personal")
+						this.context.router.history.push(`/personal/${data.data.phone}`)
 					}
 				})
 				

@@ -24,7 +24,7 @@ class App extends Component {
             <Route path="/Classify" component={Classify}></Route>
             <Route path="/product/:id" component={Product}></Route>
             <Route path="/my" component={My}></Route>
-            <Route path="/personal" component={Personal}></Route>    				
+            <Route path="/personal/:phone" component={Personal}></Route>    				
             <Redirect to='/index'></Redirect>
     			</Switch>
     		</BrowserRouter>

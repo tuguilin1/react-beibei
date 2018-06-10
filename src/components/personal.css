@@ -1,0 +1,53 @@
+.Personal header{
+	background: url("https://b0.hucdn.com/party/2016/9/upload_7042439aa70b86219aa3d50854eccc39_750x204.png") repeat;
+	background-size: contain;
+	height: 6rem;
+	width: 100%;
+}
+
+.person-info{
+	width: 16rem;
+	height: 4rem;
+	margin-top: 1rem;
+	margin-left: 1rem;
+	display: flex;
+}
+.person-avatar{
+	width: 4rem;
+	height: 4rem;
+	background-image: url("https://h0.hucdn.com/open/201724/21d777a959c51877_225x225.png!160x160.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.person-account{
+	margin-left: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.enter-box ul{
+	display: flex;
+	width: 100%;
+	margin-left: 0;
+	padding-left: 0;
+	height: 2rem;
+	line-height: 2rem;
+}
+
+.enter-box li{
+	list-style: none;
+	flex: 1;
+	text-align: center;
+}
+
+.activity{
+	width: 100%;
+}
+
+.activity img{
+	width: 100%;
+}
+
+.my-list{
+	margin-top: 2rem;
+}

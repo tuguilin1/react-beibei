@@ -35,10 +35,10 @@ export default class My extends Component{
 				return;
 			}
 			let param = {phone,password};
-			axios.post("http://localhost:3001/users/login",param).then((data)=>{
+			axios.post("http://localhost:3001/users",param).then((data)=>{
 				if(data.data.status){
 					Toast.info(data.data.msg)
-					this.context.router.history.push("/personal")
+					this.context.router.history.push(`/personal/${phone}`)
 				}else{
 					Toast.info(data.data.msg)
 				}

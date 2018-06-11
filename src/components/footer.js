@@ -28,6 +28,7 @@ class Footer extends Component{
 		switch(currentText){
 			case "今日热卖":
 				this.context.router.history.push("/index");
+				break;
 			case "我的":
 				axios.post("http://localhost:3001/users/login").then((data)=>{
 					console.log(data)
@@ -37,6 +38,10 @@ class Footer extends Component{
 						this.context.router.history.push(`/personal/${data.data.phone}`)
 					}
 				})
+				break;
+			case "拼团":
+				this.context.router.history.push("/group_nav");
+				break;
 				
 		}
 

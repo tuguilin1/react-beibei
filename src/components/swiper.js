@@ -6,7 +6,7 @@ import "./swiper.css"
 import {connect} from 'react-redux'
 import {getGoodsinfo} from "../redux/goodsinfo";
 import {getRecommendData} from "../api/jsonp"
-
+import { Redirect } from "react-router-dom";
 @connect(
 	state=>state.swiper,
 	{getGoodsinfo}
@@ -16,7 +16,8 @@ class Swiper extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			data:[]
+			data:[],
+			jump:false
 		}
 	}
 
@@ -26,7 +27,7 @@ class Swiper extends Component{
 			if(data.page){
 				this.props.getGoodsinfo({
 					goodsImg:item.img,
-					eventId:this.props.event_id,
+					eventId:item.event_id,
 					iid:item.iid,
 					goodsName:item.title,
 					price:item.price?item.price:item.group_price,
@@ -39,8 +40,16 @@ class Swiper extends Component{
 			}
 			
 		})
+		this.setState({
+			jump:true
+		})
 	}
 	render(){
+		if(this.state.jump){
+			return (
+				<Redirect push to="/detail"/>
+			)
+		}
 		return(
 			<div>
 		 		<WingBlank>
@@ -62,7 +71,7 @@ class Swiper extends Component{
 				          					{item.title}
 				          				</div>
 				          				<div className="reco-price">
-				          					{toDecimal(item.origin_price)}
+				          					<span>{toDecimal(item.origin_price)}</span>
 				          				</div>
 				          			</div>
 			          			))}

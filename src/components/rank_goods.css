@@ -1,0 +1,68 @@
+.rank-goods{
+	width: 100%;
+	margin-top: 1rem;
+	display: flex;
+	height: 10rem;
+	box-sizing: border-box;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	overflow: hidden;
+}
+
+.rank-goods-img{
+	width: 9rem;
+	height: 10rem;
+}
+
+.rank-goods-img img{
+	width: 9rem;
+	height: 10rem;
+}
+p{
+	margin: 0;
+}
+.rank-goods-info{
+	flex: 1;
+	overflow: hidden;
+	margin-left: 0.5rem;
+}
+.rank-goods-name{
+	height: 2rem;
+	overflow: hidden;
+}
+
+.rank-goods-tag{
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+}
+
+.rank-goods-tag span{
+	background: #ff5e4c;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	border-radius: 0.5rem;
+	color:#fff;
+	opacity: 0.8;
+}
+
+.rank-goods-buying{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+}
+
+.rank-goods-buying2 span{
+	display: block;
+	height: 2rem;
+	line-height: 2rem;
+	font-size: 1.3rem;
+}
+
+.start-group{
+	padding-left: 2rem;
+	padding-right: 2rem;
+	background: #ff5e4c;
+	border-radius: 1rem;
+	text-align: center;
+	color:#fff;
+}

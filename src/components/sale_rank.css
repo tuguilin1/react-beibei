@@ -1,0 +1,14 @@
+.sale-rank header{
+	background: url("https://h0.hucdn.com/open/201718/34350f7ea35a8b34_750x150.png") no-repeat;
+	background-size: cover;
+	height: 6rem;
+	padding-top: 1rem;
+}
+
+.top{
+	width: 6rem;
+	height: 5rem;
+	margin: 0 auto;
+	background: url("https://h0.hucdn.com/open/201718/e1a5a836744f3719_200x150.png") no-repeat;
+	background-size: cover;
+}

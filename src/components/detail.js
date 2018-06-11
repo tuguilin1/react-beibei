@@ -105,7 +105,6 @@ class Detail extends Component{
 							</div>
 						</div>
 						<Button>查看全部评价</Button>
-						{this.props.eventId?<div><header className="reco-goods">  大家还买了</header><Swiper event_id={this.props.eventId} iid={this.props.iid}/></div>:""}
 					</div>
 				<Bottomnav msg1 ="加入购物车" msg2="立即购买" color="black" iid={this.props.iid} />
 			</div>

@@ -24,7 +24,9 @@ class Recommend extends Component{
 		this.handlePage()
 	}
 	componentWillReceiveProps(nextprops){
-		console.log(nextprops)
+		this.setState({
+			list:[]
+		})
 		this.handlePage(nextprops.page)
 	}
 	// jump(item){
@@ -53,15 +55,15 @@ class Recommend extends Component{
 			}
 			if(data.martshow_items){
 				this.setState({
-					list:<Goods eventid={this.props.eventid} data={data.martshow_items}/>
+					list:<Goods eventid={this.props.eventid} data={data.martshow_items} overflow={false}/>
 				})			
 			}else if(data.fightgroup_items){
 				this.setState({
-					list:<Goods eventid={this.props.eventid} data={data.fightgroup_items}/>
+					list:<Goods eventid={this.props.eventid} data={data.fightgroup_items} overflow={false}/>
 				})	
 			}else if(data.search_items){
 				this.setState({
-					list:<Goods eventid={this.props.eventid} data={data.search_items}/>
+					list:<Goods eventid={this.props.eventid} data={data.search_items} overflow={false}/>
 				})
 			}
 

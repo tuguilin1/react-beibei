@@ -9,6 +9,7 @@ import {getSwiperinfo} from "../redux/swiperinfo";
 import toDecimal from "../js/price"
 import Swiper from "./swiper"
 import Nav from "./nav.js"
+import Panel from "./panel"
 import Bottomnav from "./bottom_nav"
 @connect( state=>state.goods )
 
@@ -27,7 +28,8 @@ class Detail extends Component{
 				"美妆":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-591-1-50.html`,
 				"服饰":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-6_449_562_571_1454_1455_1472_1485_1552-1-50.html`
 			},
-			page:"9.9秒杀"
+			page:"9.9秒杀",
+			isShow:false
 		}
 	}
 	handleClick(event){
@@ -37,6 +39,15 @@ class Detail extends Component{
 	}
 	componentWillReceiveProps(){
 		window.scrollTo(0,0)
+	}
+	showPanel(e){
+		
+		let text = e.target.innerHTML
+		if(text==="加入购物车"||text==="立即购买"){
+			this.setState({
+				isShow:true
+			})
+		}
 	}
 	render(){
 		return(
@@ -106,7 +117,8 @@ class Detail extends Component{
 						</div>
 						<Button>查看全部评价</Button>
 					</div>
-				<Bottomnav msg1 ="加入购物车" msg2="立即购买" color="black" iid={this.props.iid} />
+					{this.state.isShow?<Panel />:""}
+					<div onClick={this.showPanel.bind(this)}><Bottomnav msg1 ="加入购物车" msg2="立即购买" color="black" iid={this.props.iid} /></div>
 			</div>
 		)
 	}

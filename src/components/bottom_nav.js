@@ -40,7 +40,7 @@ class Bottomnav extends Component{
 				<div className={`shopping ${this.props.color}`}>
 					{this.props.msg1}
 				</div>
-				<div className="shopping" onClick={this.getPrice.bind(this)}>
+				<div className="shopping">
 					{this.props.msg2}
 				</div>
 

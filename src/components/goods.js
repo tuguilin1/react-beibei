@@ -87,7 +87,7 @@ class Goods extends Component{
 			return(
 				<div className="goods" key={index} onClick={()=>{this.jumpUrl(items)}}>
 					<div className="image">
-						<LazyLoad>
+						<LazyLoad overflow={this.props.overflow}>
 							<img src={items.img}/>
 						</LazyLoad>
 					</div>

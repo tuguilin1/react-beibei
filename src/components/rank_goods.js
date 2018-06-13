@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./rank_goods.css"
 import toDecimal from "../js/price"
+
+
 export default class Rankgoods extends Component{
 	constructor(props){
 		super(props)
@@ -10,7 +12,7 @@ export default class Rankgoods extends Component{
 		return(
 			<div className="rank-goods">
 				<div className="rank-goods-img">
-					<img src="https://b1.hucdn.com/upload/item/1805/30/93371005672821_800x800.jpg!320.webp" />
+					<img src={data.img} />
 				</div>
 				<div className="rank-goods-info">
 					<p className="rank-goods-name">{data.title}</p>

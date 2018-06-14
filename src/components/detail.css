@@ -96,3 +96,20 @@
 .am-button{
 	margin-bottom: 4rem;
 }
+
+.comments-tag{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.comments-tag span{
+	background: #ff5e4c;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    opacity: 0.8;
+    display: block;
+    margin-left: 2rem;
+    margin-top: 1rem;
+}

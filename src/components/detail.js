@@ -104,9 +104,9 @@ class Detail extends Component{
 										好评率({this.props.rate})
 									</span>
 								</header>
-								<div className="evaluate-tag">
+								<div className="comments-tag">
 									{this.props.rate_tags?this.props.rate_tags.map((item,index)=>{
-										return <Tag key={index}>{item.name}({item.count})</Tag>
+										return <span selected key={index}>{item.name}({item.count})</span>
 									}):""}
 								</div>
 							</div>

@@ -38,44 +38,45 @@ class Goods extends Component{
 					rate_items:data.count?data.rate_items:[]
 				})
 			}
+			if(window.location.pathname!=="/detail"){
+				this.setState({
+					jump:true
+				})
+			}
 			
 		})
-		console.log(this.props.eventid)
-		if(typeof this.props.eventid !== "undefined"){
-			const url2 = `/gateway/route.html`
-			const data={
-				method: 'beibei.recom.list.get',
-				scene_id: 'app_item_detail_bei_ma_recom',
-				iid: item.iid,
-				event_id: this.props.eventid,
-				uid: 0
-			}
-			axios.get(url2,{
-				params:data
-			}).then((data)=>{
-				let list = data.data.recom_items.map((v)=>{
-					return v
-				}).reverse()
-				let num = data.data.recom_items.length/3;
-				let arr = new Array
-				while(num--){
+		// console.log(this.props.eventid)
+		// if(typeof this.props.eventid !== "undefined"){
+		// 	const url2 = `/gateway/route.html`
+		// 	const data={
+		// 		method: 'beibei.recom.list.get',
+		// 		scene_id: 'app_item_detail_bei_ma_recom',
+		// 		iid: item.iid,
+		// 		event_id: this.props.eventid,
+		// 		uid: 0
+		// 	}
+		// 	axios.get(url2,{
+		// 		params:data
+		// 	}).then((data)=>{
+		// 		let list = data.data.recom_items.map((v)=>{
+		// 			return v
+		// 		}).reverse()
+		// 		let num = data.data.recom_items.length/3;
+		// 		let arr = new Array
+		// 		while(num--){
 
-					arr[num]=list.splice(0,3)
-				}
-				this.props.getSwiperinfo({
-					swiperData:arr
-				})
-			})
-		}
+		// 			arr[num]=list.splice(0,3)
+		// 		}
+		// 		this.props.getSwiperinfo({
+		// 			swiperData:arr
+		// 		})
+		// 	})
+		// }
 
 		this.setState({
 			id:item.iid
 		})
-		if(window.location.pathname!=="/detail"){
-			this.setState({
-				jump:true
-			})
-		}
+
 	}
 	render(){
 		if(this.state.jump){

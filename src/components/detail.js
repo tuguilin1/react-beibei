@@ -29,7 +29,8 @@ class Detail extends Component{
 				"服饰":`https://sapi.beibei.com/fightgroup/item_more_by_cid/${this.props.iid}-6_449_562_571_1454_1455_1472_1485_1552-1-50.html`
 			},
 			page:"9.9秒杀",
-			isShow:false
+			isShow:false,
+			data:''
 		}
 	}
 	handleClick(event){
@@ -37,8 +38,18 @@ class Detail extends Component{
 			page:event.target.innerHTML
 		})
 	}
-	componentWillReceiveProps(){
-		window.scrollTo(0,0)
+	componentDidMount(){
+		console.log(this.props.iid)
+		axios.get("/mroute.html",{
+			params:{
+				method:"beibei.item.stock.get",
+				iid:this.props.iid
+			}
+		}).then((data)=>{
+			this.setState({
+				data:data.data
+			})
+		})
 	}
 	showPanel(e){
 		
@@ -48,6 +59,11 @@ class Detail extends Component{
 				isShow:true
 			})
 		}
+	}
+	closePanel(){
+		this.setState({
+			isShow:false
+		})
 	}
 	render(){
 		return(
@@ -117,7 +133,7 @@ class Detail extends Component{
 						</div>
 						<Button>查看全部评价</Button>
 					</div>
-					{this.state.isShow?<Panel />:""}
+					{this.state.isShow?<Panel closePanel={this.closePanel.bind(this)} data={this.state.data} />:""}
 					<div onClick={this.showPanel.bind(this)}><Bottomnav msg1 ="加入购物车" msg2="立即购买" color="black" iid={this.props.iid} /></div>
 			</div>
 		)

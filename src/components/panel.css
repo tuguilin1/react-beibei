@@ -13,8 +13,9 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	height: 20rem;
+	height: 25rem;
 	background: white;
+	animation: boardup .5s;
 }
 
 .selected-img{
@@ -50,4 +51,58 @@
 .close-info .am-icon{
 	width: 4rem;
 	height: 4rem;
+}
+
+@keyframes boardup{
+	from{
+		bottom: -25rem;
+	}
+	to{
+		bottom: 0
+	}
+}
+
+.selected-scroll{
+	height: 19rem;
+	overflow: scroll;
+}
+
+.products{
+	box-sizing: border-box;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-top: 1rem;
+}
+
+.selected{
+	width: 100%;
+	height: 5rem;
+}
+
+.tag-header{
+	font-size: 1.2rem;
+}
+
+.products-tags{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.tags{
+	padding: 0.2rem 0.8rem;
+	background: #eee;
+	color:#333;
+	border-radius: 1rem;
+	box-sizing: border-box;
+	font-size: 0.8rem;
+	margin-top: 0.3rem;
+	text-align: center;
+	line-height: 1.5rem;
+	margin-left: 1.2rem;
+}
+
+.tag-active{
+	background: #ff4965;
+	color:white;
 }

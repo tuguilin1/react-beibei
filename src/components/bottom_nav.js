@@ -19,18 +19,6 @@ class Bottomnav extends Component{
 				}]
 		}
 	}
-	getPrice(){
-		console.log(1)
-		axios.get("/mroute.html",{
-			params:{
-				method:"beibei.item.stock.get",
-				iid:this.props.iid
-			}
-		}).then((data)=>{
-			console.log(data)
-		})
-	}
-
 	render(){
 		return(
 			<div className="bottom-nav">

@@ -31,7 +31,12 @@ export default class Panel extends Component{
 		let arr2 = {};
 		arr2[item] = tag
 		let arr = Object.assign({},this.state.tags,arr2);
-		console.log(arr)
+		console.log(Object.keys(this.state.imgs),tag)
+		if(Object.keys(this.state.imgs).includes(""+tag)){
+			this.setState({
+				img:this.state.imgs[tag]
+			})
+		}
 		this.setState({
 			tags:arr
 		})
@@ -42,7 +47,7 @@ export default class Panel extends Component{
 				<section className="board">
 					<div className="selected">
 						<div className="selected-img">
-							<img src="https://b1.hucdn.com/upload/item/1802/07/70457798516490_800x800.jpg!250x250.webp" />
+							<img src={this.state.img===""?"https://h0.hucdn.com/open/201645/1365743f2a2dd74f_640x640.jpg":this.state.img} />
 						</div>
 						<div className="selected-info">
 							<span className="now-price">

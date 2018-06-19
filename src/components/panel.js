@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./panel.css"
+import toDecimal from "../js/price"
 import { Icon } from 'antd-mobile';
+import { List, Stepper,Button } from 'antd-mobile';
 export default class Panel extends Component{
 	constructor(props){
 		super(props);
@@ -10,12 +12,13 @@ export default class Panel extends Component{
 			kvMap:{},
 			allMap:{},
 			img:"",
-			tags:{}
+			tags:{},
+			price:"￥0.00",
+			val:1
 		}
 	}
 	componentDidMount(){
 		if(this.props.data !== null||this.props.data !== ""){
-			console.log(this.props.data)
 			this.setState({
 				imgs:this.props.data.imgs||[],
 				idMap:this.props.data.sku_id_map||{},
@@ -27,11 +30,45 @@ export default class Panel extends Component{
 		}
 
 	}
+	onChange = (val) => {
+    	// console.log(val);
+    	let price = this.state.price;
+	    price = price.slice(1);
+	    price = parseInt(price)/this.state.val*val;
+	    this.setState({ val });
+	    
+	    this.setState({
+	    	price:toDecimal(price*100)
+	    })
+	}
 	select(tag,item){
 		let arr2 = {};
-		arr2[item] = tag
+		this.setState({
+			val:1
+		})
+		if(this.state.tags[item] === tag){
+			arr2[item]="";
+			let arr = Object.assign({},this.state.tags,arr2);
+			this.setState({
+				tags:arr
+			})
+			return;
+		}
+
+		arr2[item] = tag;
+
 		let arr = Object.assign({},this.state.tags,arr2);
-		console.log(Object.keys(this.state.imgs),tag)
+		if(Object.keys(arr).length === Object.keys(this.state.idMap).length){
+			let str = "";
+			Object.keys(arr).forEach((item)=>{
+				str += "v"+arr[item]
+			})
+			if(Object.keys(this.state.allMap).includes(str)){
+				this.setState({
+					price:toDecimal(this.state.allMap[str].price)
+				})
+			}
+		}
 		if(Object.keys(this.state.imgs).includes(""+tag)){
 			this.setState({
 				img:this.state.imgs[tag]
@@ -51,10 +88,16 @@ export default class Panel extends Component{
 						</div>
 						<div className="selected-info">
 							<span className="now-price">
-								￥19.90
+								{
+									this.state.price
+								}
 							</span>
 							<span className="selected-version">
-								已选
+								已选{Object.keys(this.state.tags).map((item)=>{
+									return(
+										this.state.kvMap[`v${this.state.tags[item]}`]
+									)
+								})}
 							</span>
 						</div>
 						<div className="close-info" onClick={this.props.closePanel}>
@@ -79,6 +122,22 @@ export default class Panel extends Component{
 							</div>)
 						})
 						}
+						<List>
+					        <List.Item
+					          wrap
+					          extra={
+					            <Stepper
+					              style={{ width: '100%', minWidth: '100px' }}
+					              showNumber
+					              min={1}
+					              value={this.state.val}
+					              onChange={this.onChange}
+					            />}
+					        >
+					        购买数量
+					        </List.Item>
+					    </List>
+					    <Button>确定</Button>
 					</div>
 
 				</section>

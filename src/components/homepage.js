@@ -12,9 +12,9 @@ class HomePage extends Component{
 			page:"童装",
 			nav:{
 				"今日特卖":"iconfont icon-icon019",
-				"拼团":"iconfont icon-icon019",
-				"购物车":"iconfont icon-icon019",
-				"我的":"iconfont icon-icon019"}
+				"拼团":"iconfont icon-pintuan",
+				"购物车":"iconfont icon-gouwuche",
+				"我的":"iconfont icon-home"}
 		}
 	}
 	handleClick(event){
